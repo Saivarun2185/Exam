@@ -210,7 +210,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "The user selected the following input: <br>\n\n{{formData.make}} {{formData.model}}  {{formData.year}} {{formData.type}} <br>\nwith {{formData.features}} <br>\naccesories on {{formData.purchaseDate}}. <br>\n\n\nThe user will get 30% discount."
+module.exports = "The user selected the following input: <br>\r\n\r\n{{formData.make}} {{formData.model}}  {{formData.year}} {{formData.type}} <br>\r\nwith {{formData.Features}} <br>\r\naccesories on {{formData.purchaseDate}}. <br>\r\n\r\n\r\nThe user will get {{discount}}% discount."
 
 /***/ }),
 
@@ -241,9 +241,13 @@ var FeedbackComponent = /** @class */ (function () {
     function FeedbackComponent(http) {
         this.http = http;
         this.formData = {};
+        this.discount = 0;
     }
     FeedbackComponent.prototype.ngOnInit = function () {
         this.formData = this.http.getForm();
+        var date = new Date(this.formData['purchaseDate']);
+        console.log(date.getDate() % 2);
+        this.discount = date.getDate() % 2 == 0 ? 30 : 40;
         console.log(this.formData);
     };
     FeedbackComponent = __decorate([
@@ -279,7 +283,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form #formpart1=\"ngForm\" (ngSubmit)=\"signin(formpart1)\">\n  <div class=\"form-group row\">\n    <label for=\"inputEmail3\" class=\"col-sm-2 col-form-label\">Make</label>\n    <div class=\"col-sm-10\">\n      <input type=\"text\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Make\" ngModel name=\"make\">\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <label for=\"inputEmail3\" class=\"col-sm-2 col-form-label\">Model</label>\n    <div class=\"col-sm-10\">\n    <select>\n      <option value=\"Civic\">Civic</option>\n      <option value=\"Odyssey\">Odyssey</option>\n      <option value=\"Pilot\">Pilot</option>\n      <option value=\"Accord\">Accord</option>\n    </select>\n  </div>\n  </div>\n  <div class=\"form-group row\">\n    <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\">Year</label>\n    <div class=\"col-sm-10\">\n      <input type=\"number\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Year\" ngModel name=\"year\">\n    </div>\n  </div>\n  <fieldset class=\"form-group\">\n    <div class=\"row\">\n      <legend class=\"col-form-label col-sm-2 pt-0\">Type</legend>\n      <div class=\"col-sm-10\">\n        <div class=\"form-check\">\n          <input class=\"form-check-input\" type=\"radio\" name=\"type\" id=\"gridRadios1\" value=\"Sedan\" ngModel>\n          <label class=\"form-check-label\" for=\"gridRadios1\">\n            Sedan\n          </label>\n        </div>\n        <div class=\"form-check\">\n          <input class=\"form-check-input\" type=\"radio\" name=\"type\" id=\"gridRadios2\" value=\"Coupe\" ngModel>\n          <label class=\"form-check-label\" for=\"gridRadios2\">\n            Coupe\n          </label>\n        </div>\n      </div>\n    </div>\n  </fieldset>\n  <div class=\"form-group row\">\n    <div class=\"col-sm-10\">\n      <button type=\"submit\" class=\"btn btn-primary\">next</button>\n    </div>\n  </div>\n</form>"
+module.exports = "<form #formpart1=\"ngForm\" (ngSubmit)=\"signin(formpart1)\">\r\n  <div class=\"form-group row\">\r\n    <label for=\"inputEmail3\" class=\"col-sm-2 col-form-label\">Make</label>\r\n    <div class=\"col-sm-10\">\r\n      <input type=\"text\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Make\" ngModel name=\"make\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-group row\">\r\n    <label for=\"inputEmail3\" class=\"col-sm-2 col-form-label\">Model</label>\r\n    <div class=\"col-sm-10\">\r\n    <select>\r\n      <option value=\"Civic\">Civic</option>\r\n      <option value=\"Odyssey\">Odyssey</option>\r\n      <option value=\"Pilot\">Pilot</option>\r\n      <option value=\"Accord\">Accord</option>\r\n    </select>\r\n  </div>\r\n  </div>\r\n  <div class=\"form-group row\">\r\n    <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\">Year</label>\r\n    <div class=\"col-sm-10\">\r\n      <input type=\"number\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Year\" ngModel name=\"year\">\r\n    </div>\r\n  </div>\r\n  <fieldset class=\"form-group\">\r\n    <div class=\"row\">\r\n      <legend class=\"col-form-label col-sm-2 pt-0\">Type</legend>\r\n      <div class=\"col-sm-10\">\r\n        <div class=\"form-check\">\r\n          <input class=\"form-check-input\" type=\"radio\" name=\"type\" id=\"gridRadios1\" value=\"Sedan\" ngModel>\r\n          <label class=\"form-check-label\" for=\"gridRadios1\">\r\n            Sedan\r\n          </label>\r\n        </div>\r\n        <div class=\"form-check\">\r\n          <input class=\"form-check-input\" type=\"radio\" name=\"type\" id=\"gridRadios2\" value=\"Coupe\" ngModel>\r\n          <label class=\"form-check-label\" for=\"gridRadios2\">\r\n            Coupe\r\n          </label>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </fieldset>\r\n  <div class=\"form-group row\">\r\n    <div class=\"col-sm-10\">\r\n      <button type=\"submit\" class=\"btn btn-primary\">next</button>\r\n    </div>\r\n  </div>\r\n</form>"
 
 /***/ }),
 
@@ -352,7 +356,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form #formpart2=\"ngForm\" (ngSubmit)=\"signin(formpart2)\">\n \n    <div>\n        <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\">Features</label>\n        <input type=\"checkbox\" id=\"scales\" name=\"features\" ngModel  ng-true-value=\"'GPS'\" ng-false-value=\"''\"  />\n        <label for=\"scales\">GPS</label>\n    </div>\n    <div>\n        <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\"></label>\n        \n        <input type=\"checkbox\" id=\"scales\" name=\"features\" ngModel ng-true-value=\"'Security Lock'\" ng-false-value=\"''\"/>\n        <label for=\"scales\">Security Lock</label>\n    </div>\n    <div>\n        <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\"></label>\n        \n        <input type=\"checkbox\" id=\"scales\" name=\"features\" ngModel ng-true-value=\"'Cargo Mat'\" ng-false-value=\"''\"/>\n        <label for=\"scales\">Cargo Mat</label>\n    </div>\n  \n  <div class=\"form-group row\">\n      <label for=\"inputEmail3\" class=\"col-sm-2 col-form-label\">Purchase Date</label>\n      <div class=\"col-sm-5\">\n        <input type=\"date\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Purchase Date\" ngModel name=\"purchaseDate\">\n      </div>\n    </div>\n    \n    <div class=\"form-group row\">\n      <div class=\"col-sm-10\">\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n      </div>\n    </div>\n\n  </form>\n"
+module.exports = "<form #formpart2=\"ngForm\" (ngSubmit)=\"signin(formpart2)\">\r\n \r\n    <div>\r\n        <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\">Features</label>\r\n        <input type=\"checkbox\" id=\"scales\" name=\"GPS\" ngModel  ng-true-value=\"'GPS'\" ng-false-value=\"''\"  />\r\n        <label for=\"scales\">GPS</label>\r\n    </div>\r\n    <div>\r\n        <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\"></label>\r\n        \r\n        <input type=\"checkbox\" id=\"scales\" name=\"Security Lock\" ngModel ng-true-value=\"'Security Lock'\" ng-false-value=\"''\"/>\r\n        <label for=\"scales\">Security Lock</label>\r\n    </div>\r\n    <div>\r\n        <label for=\"inputPassword3\" class=\"col-sm-2 col-form-label\"></label>\r\n        \r\n        <input type=\"checkbox\" id=\"scales\" name=\"Cargo Mat\" ngModel ng-true-value=\"'Cargo Mat'\" ng-false-value=\"''\"/>\r\n        <label for=\"scales\">Cargo Mat</label>\r\n    </div>\r\n  \r\n  <div class=\"form-group row\">\r\n      <label for=\"inputEmail3\" class=\"col-sm-2 col-form-label\">Purchase Date</label>\r\n      <div class=\"col-sm-5\">\r\n        <input type=\"date\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Purchase Date\" ngModel name=\"purchaseDate\">\r\n      </div>\r\n    </div>\r\n    \r\n    <div class=\"form-group row\">\r\n      <div class=\"col-sm-10\">\r\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n    </div>\r\n\r\n  </form>\r\n"
 
 /***/ }),
 
@@ -399,6 +403,17 @@ var Formpart2Component = /** @class */ (function () {
     Formpart2Component.prototype.signin = function (form) {
         var _this = this;
         var formpart1 = this.http.getForm();
+        var Features = [];
+        if (form.value.GPS) {
+            Features.push('GPS');
+        }
+        if (form.value['Security Lock']) {
+            Features.push('Security Lock');
+        }
+        if (form.value['Cargo Mat']) {
+            Features.push('Cargo Mat');
+        }
+        form.value.Features = Features;
         this.http.setForm(__assign({}, formpart1, form.value));
         this.http.postService().subscribe(function (res) {
             console.log(res);
@@ -531,7 +546,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\S530464\Desktop\Used Cars Search Engine\usedcarssearchengine\exam\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\S530464\Desktop\Exam\exam\src\main.ts */"./src/main.ts");
 
 
 /***/ })

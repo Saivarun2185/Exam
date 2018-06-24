@@ -11,7 +11,7 @@ year : Number,
 
 type : String,
 
-features : String,
+Features : [String],
 
 purchaseDate : Date,
 
